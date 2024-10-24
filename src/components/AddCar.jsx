@@ -3,7 +3,19 @@ import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, T
 
 export default function AddCar() {
 
-    const [open, setOpen] = useState();
+    const [car, setCar] = useState({
+        brand: '',
+        model: '',
+        color: '',
+        fuel: '',
+        modelYear: '',
+        price: ''
+
+
+
+    })
+
+    const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -13,23 +25,21 @@ export default function AddCar() {
         setOpen(false);
     };
 
+    const handleChange = event => {
+        setCar({...car, [event.target.name]: event.target.value  });
+    }
+
+    const handleSave = () => {
+        console.log(car);
+    }
+
     return (
         <>
         <Button onClick={handleClickOpen}>Add car</Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
-                PaperProps={{
-                    component: 'form',
-                    onSubmit: (event) => {
-                        event.preventDefault();
-                        const formData = new FormData(event.currentTarget);
-                        const formJson = Object.fromEntries((formData).entries());
-                        const email = formJson.email;
-                        console.log(email);
-                        handleClose();
-                    },
-                }}
+             
             >
                 <DialogTitle>New car</DialogTitle>
                 <DialogContent>
@@ -43,6 +53,7 @@ export default function AddCar() {
                         type="text"
                         fullWidth
                         variant="standard"
+                        onChange={handleChange}
                     />
                      <TextField
                         autoFocus
@@ -53,6 +64,7 @@ export default function AddCar() {
                         type="text"
                         fullWidth
                         variant="standard"
+                        onChange={handleChange}
                     />
                       <TextField
                         autoFocus
@@ -63,6 +75,7 @@ export default function AddCar() {
                         type="text"
                         fullWidth
                         variant="standard"
+                        onChange={handleChange}
                     />
                       <TextField
                         autoFocus
@@ -73,6 +86,7 @@ export default function AddCar() {
                         type="text"
                         fullWidth
                         variant="standard"
+                        onChange={handleChange}
                     />
                       <TextField
                         autoFocus
@@ -83,6 +97,7 @@ export default function AddCar() {
                         type="text"
                         fullWidth
                         variant="standard"
+                        onChange={handleChange}
                     />
                       <TextField
                         autoFocus
@@ -93,11 +108,12 @@ export default function AddCar() {
                         type="text"
                         fullWidth
                         variant="standard"
+                        onChange={handleChange}
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button type="submit">Subscribe</Button>
+                    <Button onClick={handleSave}>Save</Button>
                 </DialogActions>
             </Dialog>
 

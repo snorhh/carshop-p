@@ -39,20 +39,23 @@ export default function CarList() {
         type: 'fitCellContents',
     };
 
+    useEffect(() => {
+        const fetchCars = async () => {
+            try {
+                const response = await fetch('https://car-rest-service-carshop.2.rahtiapp.fi/cars');
+                const data = await response.json();
+                setCars(data._embedded.cars);
+                console.log(data);
 
-    const fetchCars = async () => {
-        try {
-            const response = await fetch('https://car-rest-service-carshop.2.rahtiapp.fi/cars');
-            const data = await response.json();
-            setCars(data._embedded.cars);
-            console.log(data);
+            }
 
-        }
+            catch (e) {
+                console.error(e);
+            }
+        };
 
-        catch (e) {
-            console.error(e);
-        }
-    }
+        fetchCars(); // Call the async function inside useEffect
+    }, []);
 
 
 
@@ -74,7 +77,7 @@ export default function CarList() {
 
     }
 
-    useEffect(() => fetchCars(), []);
+
 
     return (
 
