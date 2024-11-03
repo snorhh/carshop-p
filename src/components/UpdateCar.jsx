@@ -1,14 +1,26 @@
 import { useState } from "react";
 import { Dialog, DialogTitle, DialogActions, Button } from "@mui/material"
 import CarDialogContent from "./CarDialogContent";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateCar } from "../utils/api"; 
 
-export default function UpdateCar({ updateCar, currentCar }) {
+
+export default function UpdateCar({ currentCar }) {
 
     const [car, setCar] = useState(currentCar);
 
     const [open, setOpen] = useState(false);
 
     const url = currentCar._links.self.href;
+
+    const queryClient = useQueryClient();
+
+    const updateMutation = useMutation({
+        mutationFn: updateCar,
+        onSuccess: () => queryClient.invalidateQueries(['cars'])
+
+    })
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -24,7 +36,7 @@ export default function UpdateCar({ updateCar, currentCar }) {
 
     const handleSave = () => {
         console.log(car);
-        updateCar(url, car);
+        updateMutation.mutate({ url, car });
         setOpen(false);
     }
 
