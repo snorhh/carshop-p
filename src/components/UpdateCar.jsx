@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dialog, DialogTitle, DialogActions, Button } from "@mui/material"
 import CarDialogContent from "./CarDialogContent";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateCar } from "../utils/api"; 
+import { updateCar } from "../utils/api";
 
 
 export default function UpdateCar({ currentCar }) {
@@ -18,9 +18,7 @@ export default function UpdateCar({ currentCar }) {
     const updateMutation = useMutation({
         mutationFn: updateCar,
         onSuccess: () => queryClient.invalidateQueries(['cars'])
-
     })
-
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -46,10 +44,9 @@ export default function UpdateCar({ currentCar }) {
             <Dialog
                 open={open}
                 onClose={handleClose}
-
             >
                 <DialogTitle>New car</DialogTitle>
-                <CarDialogContent car={car} handleChange={handleChange}/>
+                <CarDialogContent car={car} handleChange={handleChange} />
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleSave}>Save</Button>
@@ -57,10 +54,5 @@ export default function UpdateCar({ currentCar }) {
             </Dialog>
 
         </>
-
-
-
-
     )
-
 };

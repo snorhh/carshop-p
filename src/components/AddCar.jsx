@@ -11,7 +11,7 @@ export default function AddCar({ addCar }) {
         fuel: '',
         modelYear: '',
         price: ''
-})
+    })
 
     const [open, setOpen] = useState(false);
 
@@ -49,10 +49,5 @@ export default function AddCar({ addCar }) {
             </Dialog>
 
         </>
-
-
-
-
     )
-
 };

@@ -2,15 +2,15 @@ import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-material.css"; // Material Design theme
 import './CarList.css';
 import Button from '@mui/material/Button';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AgGridReact } from "ag-grid-react";
-import AddCar from "./AddCar";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchCars, addCar, deleteCar} from "../utils/api";
+import { fetchCars, addCar, deleteCar } from "../utils/api";
 import UpdateCar from "./UpdateCar";
+import AddCar from "./AddCar";
 
 export default function CarList() {
-    
+
     const { data: cars } = useQuery({
         queryKey: ['cars'],
         queryFn: fetchCars
@@ -21,18 +21,12 @@ export default function CarList() {
     const addMutation = useMutation({
         mutationFn: addCar,
         onSuccess: () => queryClient.invalidateQueries(['cars'])
-
     })
 
     const deleteMutation = useMutation({
         mutationFn: deleteCar,
         onSuccess: () => queryClient.invalidateQueries(['cars'])
-
     })
-
-
-
-
 
     const [columnDefs, setColumnDefs] = useState([
         { field: 'brand', sort: 'asc' },
@@ -65,30 +59,9 @@ export default function CarList() {
         sortable: true, filter: true
     };
 
-
     const autoSizeStrategy = {
         type: 'fitCellContents',
     };
-
-
-
-
-
-
-   // useEffect(() => {
-    //    fetchCars(); // Call the async function inside useEffect
-   // }, []);
-
-
-
-
-
-
-
-
-
-
-
 
     return (
 
@@ -103,11 +76,6 @@ export default function CarList() {
                     accentedSort={true}
                 />
             </div>
-
-
-
-
         </div>
-
     );
 }

@@ -1,11 +1,8 @@
 const fetchCars = async () => {
-
     const response = await fetch('https://car-rest-service-carshop.2.rahtiapp.fi/cars');
     const data = await response.json();
     return data._embedded.cars;
-
 };
-
 
 const addCar = async (car) => {
     const options = {
@@ -15,13 +12,12 @@ const addCar = async (car) => {
         },
         body: JSON.stringify(car)
     }
-
+    
     const response = await fetch('https://car-rest-service-carshop.2.rahtiapp.fi/cars', options);
     const data = await response.json();
     return data;
 
 }
-
 
 const deleteCar = async (url) => {
     const options = {
